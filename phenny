@@ -44,7 +44,7 @@ def create_default_config(fn):
 
    # Directories to load user modules from
    # e.g. /path/to/my/modules
-   extra = []
+   plugins = []
 
    # Services to load: maps channel names to white or black lists
    external = { 
@@ -141,6 +141,13 @@ def main(argv=None):
       if module.host == 'irc.example.net': 
          error = ('Error: you must edit the config file first!\n' + 
                   "You're currently using %s" % module.filename)
+         print >> sys.stderr, error
+         sys.exit(1)
+
+      if not module.plugins:
+         error = ('Error: you must add some plugins first!\n' +
+                 'Phenny comes bundled with some, you can find them in: %s'
+                 % os.path.join(os.path.dirname(__file__), 'modules'))
          print >> sys.stderr, error
          sys.exit(1)
 

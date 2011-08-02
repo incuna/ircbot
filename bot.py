@@ -10,8 +10,6 @@ http://inamidst.com/phenny/
 import sys, os, re, threading, imp
 import irc
 
-home = os.getcwd()
-
 def decode(bytes): 
    try: text = bytes.decode('utf-8')
    except UnicodeDecodeError: 
@@ -27,32 +25,27 @@ class Phenny(irc.Bot):
       self.config = config
       self.doc = {}
       self.stats = {}
+      self.collect_plugins()
       self.setup()
+
+   def collect_plugins(self):
+      enable = getattr(self.config, 'enable', None)
+
+      def plugins(location):
+          for fn in os.listdir(location):
+              if fn.endswith('.py') and not fn.startswith('_') and (not enable or fn in enable):
+                  yield os.path.join(location, fn)
+
+      self.filenames = []
+      for location in self.config.plugins:
+          [self.filenames.append(plugin) for plugin in plugins(location)]
 
    def setup(self): 
       self.variables = {}
 
-      filenames = []
-      if not hasattr(self.config, 'enable'): 
-         for fn in os.listdir(os.path.join(home, 'modules')): 
-            if fn.endswith('.py') and not fn.startswith('_'): 
-               filenames.append(os.path.join(home, 'modules', fn))
-      else: 
-         for fn in self.config.enable: 
-            filenames.append(os.path.join(home, 'modules', fn + '.py'))
-
-      if hasattr(self.config, 'extra'): 
-         for fn in self.config.extra: 
-            if os.path.isfile(fn): 
-               filenames.append(fn)
-            elif os.path.isdir(fn): 
-               for n in os.listdir(fn): 
-                  if n.endswith('.py') and not n.startswith('_'): 
-                     filenames.append(os.path.join(fn, n))
-
       modules = []
       excluded_modules = getattr(self.config, 'exclude', [])
-      for filename in filenames: 
+      for filename in self.filenames:
          name = os.path.basename(filename)[:-3]
          if name in excluded_modules: continue
          try: module = imp.load_source(name, filename)
