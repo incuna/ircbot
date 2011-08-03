@@ -66,8 +66,8 @@ def load_places_from_google():
     name = list_names[index]
     lat = list_geo[index]['location']['lat']
     lng = list_geo[index]['location']['lng']
-    str_lat="%10.15f"%lat
-    str_lng="%10.15f"%lng
+    str_lat = "%10.15f" % lat
+    str_lng = "%10.15f" % lng
     return (str_lat,str_lng,name)
 
 if __name__ == '__main_':
