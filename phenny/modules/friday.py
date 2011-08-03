@@ -25,6 +25,6 @@ lines = [
 
 def friday(phenny,input):
     phenny.say(random.choice(lines))
-friday.rule = r'(.*)(?i)friday(.*)'
+friday.commands = ['friday']
 friday.priority = 'low'
 
