@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 googlunch.py - Phenny lunch selection module using google maps API
 By Youssef Attalla
@@ -15,7 +13,6 @@ default = 'Cafe Baci'
 def choose_lunch(phenny, input):
     lat,lng,choice=load_places_from_google()
     tiny_url=get_directions(lat,lng)
-    #print tiny_url
     phenny.say(' '.join(('Why not eat at',choice,'for lunch today?')))
     phenny.say(tiny_url)
 choose_lunch.commands = ['googlunch', 'googfood','gl']
@@ -58,25 +55,25 @@ def ensure(path):
 def load_api_key():
     conf_file = os.path.join(os.path.expanduser('~/.phenny'),'googlunch_config.txt')
     if ensure(conf_file):
-        return [l.strip() for l in open(conf_file)] 
+        return [l.strip() for l in open(conf_file)]
     else:
-        return null   
+        return None
 
 def load_places_from_google():
     api_key=load_api_key()
     url='https://maps.googleapis.com/maps/api/place/search/json?location=41.882199,-87.640493&radius=500&types=food&sensor=false&key='+api_key[0]
     places = urllib2.urlopen(url).read()
     jplaces=json.loads(places)
-    #print places
     list_geo = [result['geometry'] for result in jplaces['results']]
     list_names = [result['name'] for result in jplaces['results']]
     index = int(random.uniform(0,len(list_geo)))
-    name = list_names[index] 
+    name = list_names[index]
     lat = list_geo[index]['location']['lat']
     lng = list_geo[index]['location']['lng']
     str_lat="%10.15f"%lat
     str_lng="%10.15f"%lng
-    return (str_lat,str_lng,name) 
+    return (str_lat,str_lng,name)
 
-if __name__ == '__main_': 
+if __name__ == '__main_':
    print __doc__.strip()
+

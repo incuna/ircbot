@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
 friday.py - A module about the best day of the week
 Copyright (c) 2011 Dafydd Crosby - http://www.dafyddcrosby.com
@@ -28,3 +27,4 @@ def friday(phenny,input):
     phenny.say(random.choice(lines))
 friday.rule = r'(.*)(?i)friday(.*)'
 friday.priority = 'low'
+

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
 imdb.py - Phenny IMDB Module
 Author: Gaganpreet, http://gaganpreet.in
@@ -7,9 +6,9 @@ Author: Gaganpreet, http://gaganpreet.in
 from lxml.html import parse
 import urllib, re
 
-def imdb(phenny, input): 
+def imdb(phenny, input):
     origterm = input.groups()[1]
-    if not origterm: 
+    if not origterm:
        return phenny.say('Perhaps you meant ".wik Zen"?')
     origterm = origterm.encode('utf-8')
 
@@ -43,5 +42,6 @@ def imdb(phenny, input):
     phenny.say(movie_name + " " + movie_url);
 imdb.commands = ["imdb"];
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
    print __doc__.strip()
+
