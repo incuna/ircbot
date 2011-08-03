@@ -16,7 +16,6 @@ setup(
     url='http://inamidst.com/phenny/',
     packages=find_packages(),
     scripts=['phenny/phenny'],
-    #entry_points = {'console_scripts': ['phenny = phenny.phenny:main',],},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
