@@ -9,6 +9,11 @@ http://inamidst.com/phenny/
 import sys, os, time, threading, signal
 import bot
 
+__version__ = (0, 1, 0)
+
+def get_version():
+    return '.'.join(map(str, __version__))
+
 class Watcher(object):
     # Cf. http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/496735
     def __init__(self):
