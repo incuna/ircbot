@@ -38,10 +38,6 @@ def ensure(path):
     print 'Opening', path, 'for writing'
     try:
         f = open(path, 'w+')
-    except IOError as e:
-        print e
-        return False
-    try:
         f.write(default)
     except IOError as e:
         print e
