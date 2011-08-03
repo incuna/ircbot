@@ -7,7 +7,7 @@ http://inamidst.com/phenny/
 """
 
 import sys, os, time, threading, signal
-import bot
+from phenny import bot
 
 __version__ = (0, 1, 0)
 

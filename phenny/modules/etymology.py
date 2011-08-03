@@ -5,10 +5,10 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import re
-import web
-from tools import deprecated
+
+from phenny import web
+from phenny.tools import deprecated
 
 etyuri = 'http://etymonline.com/?term=%s'
 etysearch = 'http://etymonline.com/?search=%s'

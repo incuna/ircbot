@@ -5,9 +5,9 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import time
-from tools import deprecated
+
+from phenny.tools import deprecated
 
 @deprecated
 def f_seen(self, origin, match, args):

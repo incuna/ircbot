@@ -2,7 +2,6 @@
 imdb.py - Phenny IMDB Module
 Author: Gaganpreet, http://gaganpreet.in
 """
-
 from lxml.html import parse
 import urllib, re
 

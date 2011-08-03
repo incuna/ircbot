@@ -5,8 +5,7 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
-import web
+from phenny import web
 
 def val(phenny, input):
     """Check a webpage using the W3C Markup Validator."""

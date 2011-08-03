@@ -5,9 +5,9 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import re, urllib
-import web
+
+from phenny import web
 
 r_li = re.compile(r'(?ims)<li>.*?</li>')
 r_tag = re.compile(r'<[^>]+>')

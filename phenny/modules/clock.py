@@ -5,10 +5,10 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import re, math, time, urllib, locale, socket, struct, datetime
 from decimal import Decimal as dec
-from tools import deprecated
+
+from phenny.tools import deprecated
 
 TimeZones = {'KST': 9, 'CADT': 10.5, 'EETDST': 3, 'MESZ': 2, 'WADT': 9,
                  'EET': 2, 'MST': -7, 'WAST': 8, 'IST': 5.5, 'B': 2,

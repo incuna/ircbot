@@ -5,11 +5,11 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import re, urllib2, httplib, urlparse, time
 from htmlentitydefs import name2codepoint
-import web
-from tools import deprecated
+
+from phenny import web
+from phenny.tools import deprecated
 
 def head(phenny, input):
     """Provide HTTP HEAD information."""

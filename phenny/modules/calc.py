@@ -6,9 +6,9 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import re
-import web
+
+from phenny import web
 
 r_result = re.compile(r'(?i)<A NAME=results>(.*?)</A>')
 r_tag = re.compile(r'<\S+.*?>')

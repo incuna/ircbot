@@ -5,9 +5,9 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import re, urllib
-import web
+
+from phenny import web
 
 definitions = 'https://github.com/nslater/oblique/wiki'
 

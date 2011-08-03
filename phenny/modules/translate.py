@@ -6,9 +6,9 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import urllib
-import web
+
+from phenny import web
 
 def detect(text):
     uri = 'http://ajax.googleapis.com/ajax/services/language/detect'

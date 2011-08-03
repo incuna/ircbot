@@ -5,7 +5,6 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import sys, os.path, time, imp
 
 def f_reload(phenny, input):

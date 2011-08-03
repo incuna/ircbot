@@ -5,9 +5,9 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import re, urllib
-import web
+
+from phenny import web
 
 wikiuri = 'http://%s.wikipedia.org/wiki/%s'
 r_tr = re.compile(r'(?ims)<tr[^>]*>.*?</tr>')

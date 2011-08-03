@@ -5,9 +5,9 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import re
-import web
+
+from phenny import web
 
 class Grab(web.urllib.URLopener):
     def __init__(self, *args):

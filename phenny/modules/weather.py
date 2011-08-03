@@ -5,10 +5,10 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import re, urllib
-import web
-from tools import deprecated
+
+from phenny import web
+from phenny.tools import deprecated
 
 r_from = re.compile(r'(?i)([+-]\d+):00 from')
 

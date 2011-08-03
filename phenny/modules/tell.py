@@ -5,7 +5,6 @@ Licensed under the Eiffel Forum License 2.
 
 http://inamidst.com/phenny/
 """
-
 import os, time, random
 
 maximum = 4
