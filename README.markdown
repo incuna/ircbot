@@ -9,6 +9,6 @@ An IRC bot written in Python with a plugins framework.
 ### Authors
 * [Sean B. Palmer](http://inamidst.com/sbp), Original Author
 * [George Hickman](http://ghickman.co.uk), Various Bits
-* [Youssef Attalla], Created Google Lunch Plugin
+* Youssef Attalla, Google Lunch Plugin
 * [Dafydd Crosby](http://github.com/dafyddcrosby), Friday Plugin
 
