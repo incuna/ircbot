@@ -12,4 +12,3 @@ def deprecated(old):
     new.__module__ = old.__module__
     new.__name__ = old.__name__
     return new
-

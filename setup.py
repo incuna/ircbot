@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 
 from ircbot import get_version
 
+
 def fread(fname):
     return open(join(dirname(__file__), fname)).read()
 
@@ -25,4 +26,3 @@ setup(
         'Topic :: Communications :: Chat :: Internet Relay Chat',
     ],
 )
-

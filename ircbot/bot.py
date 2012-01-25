@@ -1,15 +1,22 @@
-import sys, os, re, threading, imp
+import sys
+import os
+import re
+import threading
+import imp
+
 import irc
+
 
 def decode(bytes):
     try:
-         text = bytes.decode('utf-8')
+        text = bytes.decode('utf-8')
     except UnicodeDecodeError:
         try:
-             text = bytes.decode('iso-8859-1')
+            text = bytes.decode('iso-8859-1')
         except UnicodeDecodeError:
             text = bytes.decode('cp1252')
     return text
+
 
 class IRCBot(irc.Bot):
     def __init__(self, config):
@@ -25,13 +32,13 @@ class IRCBot(irc.Bot):
         enable = getattr(self.config, 'enable', None)
 
         def plugins(location):
-             for fn in os.listdir(location):
-                  if fn.endswith('.py') and not fn.startswith('_') and (not enable or fn in enable):
-                        yield os.path.join(location, fn)
+            for fn in os.listdir(location):
+                if fn.endswith('.py') and not fn.startswith('_') and (not enable or fn in enable):
+                    yield os.path.join(location, fn)
 
         self.filenames = []
         for location in self.config.plugins:
-             [self.filenames.append(plugin) for plugin in plugins(location)]
+            [self.filenames.append(plugin) for plugin in plugins(location)]
 
     def setup(self):
         self.variables = {}
@@ -41,9 +48,9 @@ class IRCBot(irc.Bot):
         for filename in self.filenames:
             name = os.path.basename(filename)[:-3]
             if name in excluded_modules:
-                 continue
+                continue
             try:
-                 module = imp.load_source(name, filename)
+                module = imp.load_source(name, filename)
             except Exception, e:
                 print >> sys.stderr, "Error loading %s: %s (in bot.py)" % (name, e)
             else:
@@ -55,7 +62,7 @@ class IRCBot(irc.Bot):
         if modules:
             print >> sys.stderr, 'Registered modules:', ', '.join(modules)
         else:
-             print >> sys.stderr, "Warning: Couldn't find any modules"
+            print >> sys.stderr, "Warning: Couldn't find any modules"
 
         self.bind_commands()
 
@@ -78,7 +85,7 @@ class IRCBot(irc.Bot):
                     example = func.example
                     example = example.replace('$nickname', self.nick)
                 else:
-                     example = None
+                    example = None
                 self.doc[func.name] = (func.__doc__, example)
             self.commands[priority].setdefault(regexp, []).append(func)
 
@@ -98,7 +105,7 @@ class IRCBot(irc.Bot):
             if not hasattr(func, 'event'):
                 func.event = 'PRIVMSG'
             else:
-                 func.event = func.event.upper()
+                func.event = func.event.upper()
 
             if hasattr(func, 'rule'):
                 if isinstance(func.rule, str):
@@ -175,7 +182,7 @@ class IRCBot(irc.Bot):
 
     def call(self, func, origin, ircbot, input):
         try:
-             func(ircbot, input)
+            func(ircbot, input)
         except Exception:
             self.error(origin)
 
@@ -196,12 +203,12 @@ class IRCBot(irc.Bot):
             for regexp, funcs in items:
                 for func in funcs:
                     if event != func.event:
-                         continue
+                        continue
 
                     match = regexp.match(text)
                     if match:
                         if self.limit(origin, func):
-                             continue
+                            continue
 
                         ircbot = self.wrapped(origin, text, match)
                         input = self.input(origin, text, bytes, match, event, args)
@@ -211,11 +218,10 @@ class IRCBot(irc.Bot):
                             t = threading.Thread(target=self.call, args=targs)
                             t.start()
                         else:
-                             self.call(func, origin, ircbot, input)
+                            self.call(func, origin, ircbot, input)
 
                         for source in [origin.sender, origin.nick]:
                             try:
-                                 self.stats[(func.name, source)] += 1
+                                self.stats[(func.name, source)] += 1
                             except KeyError:
                                 self.stats[(func.name, source)] = 1
-

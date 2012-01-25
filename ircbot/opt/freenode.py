@@ -17,10 +17,10 @@ def replaced(ircbot, input):
         return
     else:
         ircbot.reply(response)
+
 replaced.commands = (
     'cp', 'pc', 'unicode', 'compare', 'map', 'acronym',
     'v', 'validate', 'thesaurus', 'web', 'mangle', 'origin',
     'swhack'
 )
 replaced.priority = 'low'
-

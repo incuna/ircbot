@@ -1,5 +1,11 @@
-import sys, re, time, traceback
-import socket, asyncore, asynchat
+import asynchat
+import asyncore
+import re
+import socket
+import sys
+import time
+import traceback
+
 
 class Origin(object):
     source = re.compile(r'([^!]*)!?([^@]*)@?(.*)')
@@ -11,10 +17,11 @@ class Origin(object):
         if len(args) > 1:
             target = args[1]
         else:
-             target = None
+            target = None
 
         mappings = {bot.nick: self.nick, None: None}
         self.sender = mappings.get(target, target)
+
 
 class Bot(asynchat.async_chat):
     def __init__(self, nick, name, channels, password=None):
@@ -40,7 +47,7 @@ class Bot(asynchat.async_chat):
             if text is not None:
                 self.push(' '.join(args) + ' :' + text + '\r\n')
             else:
-                 self.push(' '.join(args) + '\r\n')
+                self.push(' '.join(args) + '\r\n')
         except IndexError:
             pass
 
@@ -56,7 +63,7 @@ class Bot(asynchat.async_chat):
                 text = safe(text)
             self.__write(args, text)
         except Exception:
-             pass
+            pass
 
     def run(self, host, port=6667):
         self.initiate_connect(host, port)
@@ -68,7 +75,7 @@ class Bot(asynchat.async_chat):
         self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
         self.connect((host, port))
         try:
-             asyncore.loop()
+            asyncore.loop()
         except KeyboardInterrupt:
             sys.exit()
 
@@ -97,12 +104,12 @@ class Bot(asynchat.async_chat):
         if line.startswith(':'):
             source, line = line[1:].split(' ', 1)
         else:
-             source = None
+            source = None
 
         if ' :' in line:
             argstr, text = line.split(' :', 1)
         else:
-             argstr, text = line, ''
+            argstr, text = line, ''
         args = argstr.split()
 
         origin = Origin(self, source, args)
@@ -120,12 +127,12 @@ class Bot(asynchat.async_chat):
         # Cf. http://swhack.com/logs/2006-03-01#T19-43-25
         if isinstance(text, unicode):
             try:
-                 text = text.encode('utf-8')
+                text = text.encode('utf-8')
             except UnicodeEncodeError, e:
                 text = e.__class__ + ': ' + str(e)
         if isinstance(recipient, unicode):
             try:
-                 recipient = recipient.encode('utf-8')
+                recipient = recipient.encode('utf-8')
             except UnicodeEncodeError, e:
                 return
 
@@ -169,11 +176,12 @@ class Bot(asynchat.async_chat):
                     report.append(line[0].lower() + line[1:])
                     break
             else:
-                 report.append('source unknown')
+                report.append('source unknown')
 
             self.msg(origin.sender, report[0] + ' (' + report[1] + ')')
         except:
-             self.msg(origin.sender, 'Got an error.')
+            self.msg(origin.sender, 'Got an error.')
+
 
 class TestBot(Bot):
     def f_ping(self, origin, match, args):
@@ -183,6 +191,5 @@ class TestBot(Bot):
             time.sleep(int(delay))
             self.msg(origin.sender, 'pong (%s)' % delay)
         else:
-             self.msg(origin.sender, 'pong')
+            self.msg(origin.sender, 'pong')
     f_ping.rule = r'^\.ping(?:[ \t]+(\d+))?$'
-
